@@ -1,6 +1,8 @@
 package com.xiaosheng.video.dao.mapper;
 
 import com.xiaosheng.video.dao.po.UserPO;
+import org.apache.catalina.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserPOMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +16,6 @@ public interface UserPOMapper {
     int updateByPrimaryKeySelective(UserPO record);
 
     int updateByPrimaryKey(UserPO record);
+
+    UserPO getUserByPhone(@Param("phone") String phone);
 }
