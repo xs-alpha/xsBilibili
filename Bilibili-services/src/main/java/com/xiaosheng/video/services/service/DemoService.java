@@ -21,7 +21,6 @@ public class DemoService {
         stringMapHashMap.put("str", stringObjectMap1);
         stringMapHashMap.put("str2", stringObjectMap2);
         stringMapHashMap.put("str3", stringObjectMap3);
-
         return stringMapHashMap;
     }
 }

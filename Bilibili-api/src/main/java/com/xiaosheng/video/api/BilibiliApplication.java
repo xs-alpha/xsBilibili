@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan(basePackages = {"com.xiaosheng"})
 @MapperScan("com.xiaosheng.video.dao.mapper")
 @SpringBootApplication
-//@ComponentScan(basePackages = {"com.xiaosheng"})
 public class BilibiliApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(BilibiliApplication.class, args);
