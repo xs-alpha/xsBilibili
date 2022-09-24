@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: test
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapping/*.xml
+  typeAliasesPackage: com.xiaosheng.video.dao.po
+  config-location: classpath:/mybatis-config.xml
+  global-config:
+    sql-parser-cache: true
+    refresh: true
+server:
+  port: 8083
