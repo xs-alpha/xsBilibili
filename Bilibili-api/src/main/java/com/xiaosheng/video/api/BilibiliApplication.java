@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.xiaosheng"})
+@ComponentScan(basePackages = {"com.xiaosheng.video"})
 @MapperScan("com.xiaosheng.video.dao.mapper")
 @SpringBootApplication
 public class BilibiliApplication {

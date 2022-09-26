@@ -1,12 +1,11 @@
-package com.xiaosheng.video.facade.support;
+package com.xiaosheng.video.support.utils;
+
+import org.dozer.DozerBeanMapper;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import org.dozer.DozerBeanMapper;
-import org.springframework.stereotype.Component;
 
 
 public class BeanConvertorUtils {

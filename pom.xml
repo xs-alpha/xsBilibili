@@ -75,6 +75,7 @@
         <module>Bilibili-dao</module>
         <module>Bilibili-facade</module>
         <module>Bilibili-services</module>
+        <module>support</module>
     </modules>
 
     <build>
@@ -121,6 +122,9 @@
             </plugin>
 
         </plugins>
+        <!--        <configuration>-->
+        <!--            <mainClass>com.xiaosheng.video.api.BilibiliApplication</mainClass>-->
+        <!--        </configuration>-->
     </build>
 
 

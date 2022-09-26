@@ -6,10 +6,13 @@ import com.xiaosheng.video.dao.po.UserInfoPO;
 import com.xiaosheng.video.dao.po.UserPO;
 import com.xiaosheng.video.facade.constant.UserConstant;
 import com.xiaosheng.video.facade.dto.UserDto;
-import com.xiaosheng.video.facade.support.BeanConvertorUtils;
+import com.xiaosheng.video.facade.enums.BizResultCodeEnum;
 import com.xiaosheng.video.services.util.MD5Util;
 import com.xiaosheng.video.services.util.RSAUtil;
+import com.xiaosheng.video.support.result.Result;
+import com.xiaosheng.video.support.utils.BeanConvertorUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.annotations.Results;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,15 +28,16 @@ public class UserService {
     @Resource
     private UserInfoPOMapper userInfoPOMapper;
 
-    public void addUser(UserDto userDto) {
+    public Result addUser(UserDto userDto) {
         String phone = userDto.getPhone();
         if (StringUtils.isBlank(phone)) {
             // 手机号不能为空
-//            throw new j
+            return Result.buildResult(BizResultCodeEnum.CODE_ERR_PHONE);
         }
         UserPO user = userPOMapper.getUserByPhone(phone);
         if (user != null) {
             // 该手机号已注册
+            return Result.buildResult(BizResultCodeEnum.PHONE_ALREADY_REGISTERED);
         }
         String salt = String.valueOf(new Date().getTime());
         String password = userDto.getPassword();
@@ -44,6 +48,7 @@ public class UserService {
         } catch (Exception e) {
             e.printStackTrace();
             // 密码解密失败
+            return Result.buildResult(BizResultCodeEnum.PASSWORD_PARSE_EXCEPTION);
         }
         String md5Password = MD5Util.sign(rawPassword, salt, "UTF-8");
 
@@ -72,7 +77,8 @@ public class UserService {
 
         // todo: controller找不到beancontertutils
         BeanConvertorUtils.copy(userPO, userInfoPO);
-
+        return Result.buildSuccessResult();
     }
+
 
 }
