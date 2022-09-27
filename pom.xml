@@ -61,10 +61,18 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/net.sf.dozer/dozer-spring -->
+        <!--        dozer对象拷贝-->
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
             <version>5.5.1</version>
+        </dependency>
+
+        <!--        jwt-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.8.0</version>
         </dependency>
 
     </dependencies>

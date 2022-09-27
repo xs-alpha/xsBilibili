@@ -3,7 +3,7 @@ package com.xiaosheng.video.facade.dto;
 import lombok.Data;
 
 @Data
-public class UserDto {
+public class UserDTO {
     private Long id;
 
     private String phone;

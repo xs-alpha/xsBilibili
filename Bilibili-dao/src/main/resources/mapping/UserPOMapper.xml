@@ -122,4 +122,12 @@
         t_user
         where phone =#{phone}
     </select>
+
+    <select id="getUserById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        t_user
+        where id =#{id}
+    </select>
 </mapper>

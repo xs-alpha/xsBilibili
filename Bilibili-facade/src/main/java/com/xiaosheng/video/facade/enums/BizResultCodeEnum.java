@@ -8,11 +8,17 @@ public enum BizResultCodeEnum implements ResultCode {
      **/
     CODE_ERR_PHONE(101001, "手机号错误"),
 
-    PARAM_NULL_ERR(101002, "参数为空"),
+    CODE_PARAM_NULL_ERR(101002, "参数为空"),
 
-    PASSWORD_PARSE_EXCEPTION(101003, "密码解析错误"),
+    CODE_PASSWORD_PARSE_EXCEPTION(101003, "密码解析错误"),
 
-    PHONE_ALREADY_REGISTERED(101004, "手机号已注册"),
+    CODE_PHONE_ALREADY_REGISTERED(101004, "手机号已注册"),
+
+    CODE_USER_NOT_EXIST(101005, "当前用户不存在"),
+
+    CODE_INCORRECT_PASSWORD(101006, "用户名密码不匹配"),
+
+    CODE_TOKEN_GENERATE_FAILED(101007, "token生成失败"),
     ;
 
 

@@ -1,4 +1,4 @@
-package com.xiaosheng.video.services.util;
+package com.xiaosheng.video.support.utils;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 

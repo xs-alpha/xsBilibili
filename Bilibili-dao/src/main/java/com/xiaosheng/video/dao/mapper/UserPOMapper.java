@@ -18,4 +18,6 @@ public interface UserPOMapper {
     int updateByPrimaryKey(UserPO record);
 
     UserPO getUserByPhone(@Param("phone") String phone);
+
+    UserPO getUserById(@Param("id") Long id);
 }

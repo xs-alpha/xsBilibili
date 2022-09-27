@@ -8,6 +8,7 @@ public enum ResultCodeEnum implements ResultCode {
     REFRESH_TOKEN_EXPIRATION(403, "刷新token过期"),
     SIGN_ERROR(420, "接口签名错误"),
     SIGN_TIMEOUT_ERROR(421, "接口签名超时"),
+    INVALID_TOKEN(422, "非法用户token"),
     REPEAT_SUBMIT_EXPIRATION(440, "请勿重复提交");
 
     private int code;

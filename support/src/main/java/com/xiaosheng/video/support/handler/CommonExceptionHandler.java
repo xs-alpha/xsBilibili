@@ -1,5 +1,6 @@
-package com.xiaosheng.video.services.handler;
+package com.xiaosheng.video.support.handler;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.xiaosheng.video.support.exception.BusinessException;
 import com.xiaosheng.video.support.result.Result;
 import com.xiaosheng.video.support.result.ResultCodeEnum;
@@ -21,6 +22,8 @@ public class CommonExceptionHandler {
         if (e instanceof BusinessException) {
             Integer code = ((BusinessException) e).getCode();
             return Result.fail(code, message);
+        } else if (e instanceof TokenExpiredException) {
+            return Result.buildResult(ResultCodeEnum.REFRESH_TOKEN_EXPIRATION);
         } else {
             return Result.fail(ResultCodeEnum.ERROR.getCode(), ResultCodeEnum.ERROR.getMsg());
         }

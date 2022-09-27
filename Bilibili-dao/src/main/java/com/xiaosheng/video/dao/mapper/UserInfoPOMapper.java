@@ -16,4 +16,6 @@ public interface UserInfoPOMapper {
     int updateByPrimaryKeyWithBLOBs(UserInfoPO record);
 
     int updateByPrimaryKey(UserInfoPO record);
+
+    UserInfoPO getUserInfoById(Long userId);
 }
