@@ -70,7 +70,7 @@ public class UserService {
         userPO.setPassword(md5Password);
         userPO.setPhone(phone);
         userPO.setEmail(userDto.getEmail());
-        userPOMapper.insert(userPO);
+        userPOMapper.insertSelective(userPO);
 
         /**
          * 根据手机号在注册登录表查询用户信息
@@ -83,7 +83,7 @@ public class UserService {
         userInfoPO.setGender(UserConstant.GENDER_UNKNOWN);
         userInfoPO.setUserid(queryUser.getId());
         userInfoPO.setNick(UserConstant.NICK_NAME);
-        userInfoPOMapper.insert(userInfoPO);
+        userInfoPOMapper.insertSelective(userInfoPO);
 
         // todo: controller找不到beancontertutils
         BeanConvertorUtils.copy(userPO, userInfoPO);

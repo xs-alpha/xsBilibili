@@ -46,7 +46,7 @@
         <!--               selectByExampleQueryId="false">-->
         <!--        </table>-->
 
-        <table tableName="t_user" domainObjectName="UserPO"
+        <table tableName="t_following_group" domainObjectName="FollowingGroupPO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
@@ -54,7 +54,7 @@
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="t_user_info" domainObjectName="UserInfoPO"
+        <table tableName="t_user_following" domainObjectName="UserFollowingPO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
