@@ -165,4 +165,33 @@
         where
         userId=#{userId}
     </select>
+
+    <select id="getUserInfoByUserIds" resultType="com.xiaosheng.video.dao.po.UserInfoPO">
+        select
+        *
+        from
+        t_user_info
+        <where>
+            <if test="userIdList!=null and userIdList.size>0">
+                and userId in (
+                <foreach collection="userIdList" item="userId" separator=",">
+                    #{userId}
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="getPageListUserInfos" resultType="com.xiaosheng.video.dao.po.UserInfoPO">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        t_user_info
+        <where>
+            <if test="nick!=null and nick!=''">
+                and nick like concat('%', #{nick}, '%')
+            </if>
+            order by id desc
+        </where>
+    </select>
 </mapper>

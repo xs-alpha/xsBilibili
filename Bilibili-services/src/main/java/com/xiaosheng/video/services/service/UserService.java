@@ -1,14 +1,19 @@
 package com.xiaosheng.video.services.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiaosheng.video.dao.mapper.UserInfoPOMapper;
 import com.xiaosheng.video.dao.mapper.UserPOMapper;
 import com.xiaosheng.video.dao.po.UserInfoPO;
 import com.xiaosheng.video.dao.po.UserPO;
 import com.xiaosheng.video.facade.bo.UserInfoBO;
 import com.xiaosheng.video.facade.constant.UserConstant;
+import com.xiaosheng.video.facade.dto.FollowingGroupDTO;
 import com.xiaosheng.video.facade.dto.UserDTO;
 import com.xiaosheng.video.facade.dto.UserInfoDTO;
+import com.xiaosheng.video.facade.dto.UserInfoPageDTO;
 import com.xiaosheng.video.facade.enums.BizResultCodeEnum;
+import com.xiaosheng.video.support.result.PageResult;
 import com.xiaosheng.video.support.result.Result;
 import com.xiaosheng.video.support.utils.BeanConvertorUtils;
 import com.xiaosheng.video.support.utils.MD5Util;
@@ -21,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -31,6 +38,13 @@ public class UserService {
 
     @Resource
     private UserInfoPOMapper userInfoPOMapper;
+
+    @Resource
+    private UserFollowingService userFollowingService;
+
+    public UserPO getUserById(Integer followingId) {
+        return userPOMapper.getUserById(followingId.longValue());
+    }
 
     /**
      * 添加用户
@@ -159,5 +173,28 @@ public class UserService {
         BeanConvertorUtils.copy(userInfoDTO, userInfoPO);
         userInfoPOMapper.updateByPrimaryKeySelective(userInfoPO);
         return Result.buildSuccessResult();
+    }
+
+    public List<UserInfoPO> getUserInfoByUserIds(Set<Long> userIdList) {
+        return userInfoPOMapper.getUserInfoByUserIds(userIdList);
+    }
+
+    /**
+     * 获取用户信息 列表
+     *
+     * @param userInfoPageDTO
+     * @return
+     */
+    public PageResult<UserInfoBO> pageListUserInfos(UserInfoPageDTO userInfoPageDTO) {
+        Page page = new Page();
+        page.setCurrent(userInfoPageDTO.getPageNo());
+        page.setSize(userInfoPageDTO.getPageSize());
+
+        IPage<UserInfoPO> pageListUserInfos = userInfoPOMapper.getPageListUserInfos(page, userInfoPageDTO.getNick());
+        List<UserInfoPO> records = pageListUserInfos.getRecords();
+        List<UserInfoBO> userInfoBOS = BeanConvertorUtils.copyList(records, UserInfoBO.class);
+
+
+        return new PageResult<>(userInfoBOS, userInfoPageDTO.getPageNo(), pageListUserInfos.getTotal(), userInfoPageDTO.getPageSize());
     }
 }

@@ -103,4 +103,79 @@
       updateTime = #{updatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+    <select id="getByType" resultType="com.xiaosheng.video.dao.po.FollowingGroupPO">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        t_following_group
+        <where>
+            <if test="type!=null and type!=''">
+                `type`= #{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="getByUserId" resultType="com.xiaosheng.video.dao.po.FollowingGroupPO">
+        select
+        *
+        from
+        t_following_group
+        where
+        userId = #{userId} or `type` in ('0', '1', '2')
+    </select>
+
+    <!--    useGeneratedKeys="true" keyProperty="id" 是为了返回插入的主键id-->
+    <insert id="addFollowingGroup" useGeneratedKeys="true" keyProperty="id">
+        insert into t_following_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="updatetime != null">
+                updateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getUserFollowingGroups" resultType="com.xiaosheng.video.dao.po.FollowingGroupPO">
+        select
+        *
+        from
+        t_following_group
+        where
+        userId=#{userId}
+    </select>
 </mapper>

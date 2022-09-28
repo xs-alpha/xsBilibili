@@ -29,4 +29,6 @@ public class UserInfoBO {
     private String email;
 
     private String password;
+
+    private Boolean followed;
 }
