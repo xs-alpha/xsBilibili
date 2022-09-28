@@ -76,6 +76,12 @@ public class UserFollowingController {
         return Result.buildSuccessResult(followingGroupResps);
     }
 
+    /**
+     * 增加用户关注分组
+     *
+     * @param param
+     * @return
+     */
     @PostMapping("/user-following-groups")
     public Result addUserFollowingGroups(@RequestBody FollowingGroupReq param) {
         Long currentUserId = userSupport.getCurrentUserId();
@@ -88,6 +94,11 @@ public class UserFollowingController {
         return Result.buildSuccessResult(map);
     }
 
+    /**
+     * 获取用户关注列表
+     *
+     * @return
+     */
     @GetMapping("/user-following-groups")
     public Result<List<FollowingGroupResp>> getFollowingGroups() {
         Long currentUserId = userSupport.getCurrentUserId();
@@ -106,7 +117,9 @@ public class UserFollowingController {
         UserInfoPageDTO userInfoPageDTO = new UserInfoPageDTO();
         BeanConvertorUtils.copy(param, userInfoPageDTO);
         PageResult<UserInfoBO> userInfoBOPageResult = userService.pageListUserInfos(userInfoPageDTO);
-        List<UserInfoResp> userInfoResps = BeanConvertorUtils.copyList(userInfoBOPageResult.getList(), UserInfoResp.class);
+        List<UserInfoBO> list = userInfoBOPageResult.getList();
+        List<UserInfoBO> userInfoBOS = userFollowingService.checkFollowingStatus(list, currentUserId);
+        List<UserInfoResp> userInfoResps = BeanConvertorUtils.copyList(userInfoBOS, UserInfoResp.class);
         return Result.buildSuccessResult(new PageResult<UserInfoResp>(userInfoResps, userInfoBOPageResult.getPageNo(), userInfoBOPageResult.getTotal(), userInfoBOPageResult.getPageSize()));
     }
 }

@@ -141,6 +141,12 @@ public class UserFollowingService {
         return fanList;
     }
 
+    /**
+     * 添加关注分组
+     *
+     * @param followingGroupDTO
+     * @return
+     */
     public Long addUserFollowingGroups(FollowingGroupDTO followingGroupDTO) {
         followingGroupDTO.setType(FollowingTypeEnum.TYPE_USER_BUILD.getCode());
         FollowingGroupPO followingGroupPO = new FollowingGroupPO();
@@ -149,8 +155,36 @@ public class UserFollowingService {
         return followingGroupDTO.getUserid();
     }
 
+    /**
+     * 获取关注分组
+     *
+     * @param currentUserId
+     * @return
+     */
     public List<FollowingGroupBO> getUserFollowingGroups(Long currentUserId) {
         List<FollowingGroupPO> userFollowingGroups = followingGroupService.getUserFollowingGroups(currentUserId);
         return BeanConvertorUtils.copyList(userFollowingGroups, FollowingGroupBO.class);
+    }
+
+    /**
+     * 检查关注状态
+     *
+     * @param userInfoBOS
+     * @param userId
+     * @return
+     */
+    public List<UserInfoBO> checkFollowingStatus(List<UserInfoBO> userInfoBOS, Long userId) {
+        List<UserFollowingPO> userFollowingPOS = userFollowingPOMapper.getUserFollowings(userId);
+        List<UserFollowingBO> userFollowingList = BeanConvertorUtils.copyList(userFollowingPOS, UserFollowingBO.class);
+        for (UserInfoBO userInfo : userInfoBOS) {
+            userInfo.setFollowed(false);
+            for (UserFollowingBO userFollowing : userFollowingList) {
+                if (userFollowing.getFollowingid().equals(userInfo.getUserid())) {
+                    userInfo.setFollowed(true);
+                }
+            }
+        }
+
+        return userInfoBOS;
     }
 }

@@ -12,4 +12,6 @@ public class UserFollowingBO {
     private Integer groupid;
 
     private UserInfoBO userInfoBO;
+
+    private Boolean followed;
 }
