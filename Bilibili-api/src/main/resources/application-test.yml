@@ -18,6 +18,15 @@ spring:
       test-on-return: false
       pool-prepared-statements: true
       max-open-prepared-statements: 20
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+
+rsocketmq:
+  name:
+    server:
+      address: 127.0.0.1:9876
 #mybatis-plus:
 #  configuration:
 #    map-underscore-to-camel-case: true

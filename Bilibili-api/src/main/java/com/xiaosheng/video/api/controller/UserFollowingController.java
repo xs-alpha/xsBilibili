@@ -120,6 +120,6 @@ public class UserFollowingController {
         List<UserInfoBO> list = userInfoBOPageResult.getList();
         List<UserInfoBO> userInfoBOS = userFollowingService.checkFollowingStatus(list, currentUserId);
         List<UserInfoResp> userInfoResps = BeanConvertorUtils.copyList(userInfoBOS, UserInfoResp.class);
-        return Result.buildSuccessResult(new PageResult<UserInfoResp>(userInfoResps, userInfoBOPageResult.getPageNo(), userInfoBOPageResult.getTotal(), userInfoBOPageResult.getPageSize()));
+        return Result.buildSuccessResult(new PageResult<>(userInfoResps, userInfoBOPageResult.getPageNo(), userInfoBOPageResult.getTotal(), userInfoBOPageResult.getPageSize()));
     }
 }
