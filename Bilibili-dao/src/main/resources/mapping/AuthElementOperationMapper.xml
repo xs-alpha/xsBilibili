@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaosheng.video.dao.auth.mapper.AuthElementOperationMapper">
+    <resultMap id="BaseResultMap" type="com.xiaosheng.video.dao.auth.po.AuthElementOperation">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="elementName" jdbcType="VARCHAR" property="elementname"/>
+        <result column="elementCode" jdbcType="VARCHAR" property="elementcode"/>
+        <result column="operationType" jdbcType="VARCHAR" property="operationtype"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, elementName, elementCode, operationType, createTime, updateTime
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_auth_element_operation
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_auth_element_operation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.xiaosheng.video.dao.auth.po.AuthElementOperation">
+    insert into t_auth_element_operation (id, elementName, elementCode, 
+      operationType, createTime, updateTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{elementname,jdbcType=VARCHAR}, #{elementcode,jdbcType=VARCHAR}, 
+      #{operationtype,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.xiaosheng.video.dao.auth.po.AuthElementOperation">
+        insert into t_auth_element_operation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="elementname != null">
+                elementName,
+            </if>
+            <if test="elementcode != null">
+                elementCode,
+            </if>
+            <if test="operationtype != null">
+                operationType,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="updatetime != null">
+                updateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="elementname != null">
+                #{elementname,jdbcType=VARCHAR},
+            </if>
+            <if test="elementcode != null">
+                #{elementcode,jdbcType=VARCHAR},
+            </if>
+            <if test="operationtype != null">
+                #{operationtype,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xiaosheng.video.dao.auth.po.AuthElementOperation">
+        update t_auth_element_operation
+        <set>
+            <if test="elementname != null">
+                elementName = #{elementname,jdbcType=VARCHAR},
+            </if>
+            <if test="elementcode != null">
+                elementCode = #{elementcode,jdbcType=VARCHAR},
+            </if>
+            <if test="operationtype != null">
+                operationType = #{operationtype,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                updateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xiaosheng.video.dao.auth.po.AuthElementOperation">
+    update t_auth_element_operation
+    set elementName = #{elementname,jdbcType=VARCHAR},
+      elementCode = #{elementcode,jdbcType=VARCHAR},
+      operationType = #{operationtype,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

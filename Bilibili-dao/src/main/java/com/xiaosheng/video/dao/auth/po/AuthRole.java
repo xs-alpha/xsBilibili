@@ -1,15 +1,13 @@
-package com.xiaosheng.video.dao.po;
+package com.xiaosheng.video.dao.auth.po;
 
 import java.util.Date;
 
-public class UserMoments {
+public class AuthRole {
     private Long id;
 
-    private Long userid;
+    private String name;
 
-    private String type;
-
-    private Long contentid;
+    private String code;
 
     private Date createtime;
 
@@ -23,28 +21,20 @@ public class UserMoments {
         this.id = id;
     }
 
-    public Long getUserid() {
-        return userid;
+    public String getName() {
+        return name;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getCode() {
+        return code;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Long getContentid() {
-        return contentid;
-    }
-
-    public void setContentid(Long contentid) {
-        this.contentid = contentid;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Date getCreatetime() {

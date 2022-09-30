@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaosheng.video.dao.auth.mapper.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.xiaosheng.video.dao.auth.po.UserRole">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="userId" jdbcType="BIGINT" property="userid"/>
+        <result column="roleId" jdbcType="BIGINT" property="roleid"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, userId, roleId, createTime
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user_role
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.xiaosheng.video.dao.auth.po.UserRole">
+    insert into t_user_role (id, userId, roleId, 
+      createTime)
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{roleid,jdbcType=BIGINT}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.xiaosheng.video.dao.auth.po.UserRole">
+        insert into t_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="roleid != null">
+                roleId,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=BIGINT},
+            </if>
+            <if test="roleid != null">
+                #{roleid,jdbcType=BIGINT},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xiaosheng.video.dao.auth.po.UserRole">
+        update t_user_role
+        <set>
+            <if test="userid != null">
+                userId = #{userid,jdbcType=BIGINT},
+            </if>
+            <if test="roleid != null">
+                roleId = #{roleid,jdbcType=BIGINT},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xiaosheng.video.dao.auth.po.UserRole">
+    update t_user_role
+    set userId = #{userid,jdbcType=BIGINT},
+      roleId = #{roleid,jdbcType=BIGINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="getUserRoleByUserId" resultType="com.xiaosheng.video.dao.auth.po.UserRole">
+        select
+        ur.*
+        ar.name roleName,
+        ar.code roleCode
+        from
+        t_user_role ur
+        left join t_auth_role ar ur.roleId = ar.id
+        where
+        ur.userId = #{currentUserId}
+  </select>
+</mapper>

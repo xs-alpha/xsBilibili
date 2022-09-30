@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiaosheng.video.dao.mapper.UserMomentsMapper">
-    <resultMap id="BaseResultMap" type="com.xiaosheng.video.dao.po.UserMoments">
+<mapper namespace="com.xiaosheng.video.dao.mapper.UserMomentsPOMapper">
+    <resultMap id="BaseResultMap" type="com.xiaosheng.video.dao.po.UserMomentsPO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="userId" jdbcType="BIGINT" property="userid"/>
         <result column="type" jdbcType="VARCHAR" property="type"/>
         <result column="contentId" jdbcType="BIGINT" property="contentid"/>
-        <result column="createTime" jdbcType="TIMESTAMP" property="createtime"/>
-        <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime"/>
+
     </resultMap>
     <sql id="Base_Column_List">
     id, userId, type, contentId, createTime, updateTime
@@ -22,7 +21,7 @@
     delete from t_user_moments
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.xiaosheng.video.dao.po.UserMoments">
+    <insert id="insert" parameterType="com.xiaosheng.video.dao.po.UserMomentsPO">
     insert into t_user_moments (id, userId, type, 
       contentId, createTime, updateTime
       )
@@ -30,7 +29,7 @@
       #{contentid,jdbcType=BIGINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.xiaosheng.video.dao.po.UserMoments">
+    <insert id="insertSelective" parameterType="com.xiaosheng.video.dao.po.UserMomentsPO">
         insert into t_user_moments
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -73,7 +72,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.xiaosheng.video.dao.po.UserMoments">
+    <update id="updateByPrimaryKeySelective" parameterType="com.xiaosheng.video.dao.po.UserMomentsPO">
         update t_user_moments
         <set>
             <if test="userid != null">
@@ -94,7 +93,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.xiaosheng.video.dao.po.UserMoments">
+    <update id="updateByPrimaryKey" parameterType="com.xiaosheng.video.dao.po.UserMomentsPO">
     update t_user_moments
     set userId = #{userid,jdbcType=BIGINT},
       type = #{type,jdbcType=VARCHAR},
@@ -103,4 +102,6 @@
       updateTime = #{updatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
 </mapper>

@@ -23,7 +23,7 @@ spring:
     port: 6379
     password:
 
-rsocketmq:
+rocketmq:
   name:
     server:
       address: 127.0.0.1:9876
